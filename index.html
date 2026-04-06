@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Analytics Farmacias</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <div>
+          <h1>Analytics</h1>
+          <p>Farmacias</p>
+        </div>
+      </div>
+
+      <nav class="menu">
+        <a href="#dashboard" class="active">Dashboard</a>
+        <a href="#radar">Radar comercial</a>
+        <a href="#cuentas">Cuentas</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar" id="dashboard">
+        <div>
+          <h2>Panel de respuestas</h2>
+          <p>Lectura comercial de encuestas de farmacias</p>
+        </div>
+      </header>
+
+      <section class="cards" id="kpiCards">
+        <div class="card kpi">
+          <span>Total respuestas</span>
+          <strong id="kpiRespuestas">-</strong>
+        </div>
+        <div class="card kpi">
+          <span>Farmacias únicas</span>
+          <strong id="kpiFarmacias">-</strong>
+        </div>
+        <div class="card kpi">
+          <span>Oportunidad promedio</span>
+          <strong id="kpiOportunidad">-</strong>
+        </div>
+        <div class="card kpi">
+          <span>Digital promedio</span>
+          <strong id="kpiDigital">-</strong>
+        </div>
+      </section>
+
+      <section class="card panel" id="insightBox">
+        <div class="panel-head">
+          <h3>Lectura automática</h3>
+        </div>
+        <div id="insightText"></div>
+      </section>
+
+      <section class="grid">
+        <div class="card panel" data-tooltip="Ranking agregado ponderado. Se asigna mayor peso a las posiciones más altas (1° = mayor valor). Refleja qué factores pesan más en la decisión de compra.">
+          <div class="panel-head">
+            <h3>Criterios de elección</h3>
+          </div>
+          <div id="chartCriterios"></div>
+        </div>
+
+       <div class="card panel" data-tooltip="Identifica qué factores impulsan el cambio de proveedor. Se pondera la posición en el ranking para reflejar la intensidad del motivo.">
+  <div class="panel-head">
+    <h3>Motivos de cambio</h3>
+  </div>
+  <div id="chartMotivos"></div>
+</div>
+
+      <div class="card panel" data-tooltip="Muestra los principales frenos al cambio. Las primeras posiciones indican mayor resistencia percibida.">
+  <div class="panel-head">
+    <h3>Barreras al cambio</h3>
+  </div>
+  <div id="chartBarreras"></div>
+</div>
+
+     <div class="card panel" id="cuentas" data-tooltip="Scores construidos a partir de respuestas sobre precio, apertura al cambio, digitalización y presión financiera. La oportunidad es un score ponderado entre esos factores.">
+  <div class="panel-head">
+    <h3>Score comercial por farmacia</h3>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Farmacia</th>
+          <th>Resp.</th>
+          <th>Precio</th>
+          <th>Cambio</th>
+          <th>Digital</th>
+          <th>Financiero</th>
+          <th>Oportunidad</th>
+        </tr>
+      </thead>
+      <tbody id="tablaFarmacias"></tbody>
+    </table>
+  </div>
+</div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Farmacia</th>
+                  <th>Resp.</th>
+                  <th>Precio</th>
+                  <th>Cambio</th>
+                  <th>Digital</th>
+                  <th>Financiero</th>
+                  <th>Oportunidad</th>
+                </tr>
+              </thead>
+              <tbody id="tablaFarmacias"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

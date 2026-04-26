@@ -234,46 +234,92 @@ function formatQuestionLabel(key) {
     .replaceAll("_", " ")
     .replace(/\b\w/g, l => l.toUpperCase());
 }
+const QUESTION_GROUPS = {
+  "Perfil de la farmacia": [
+    "q1_tipo_farmacia",
+    "q2_provincia",
+    "q2_ciudad",
+    "q3_empleados",
+    "q20_antiguedad"
+  ],
+
+  "Precio y margen": [
+    "q4_facturacion",
+    "q8_pct_pami",
+    "q7_pct_obras",
+    "q9_plazo_cobro",
+    "q14_frec_comp_precios"
+  ],
+
+  "Financiero": [
+    "q10_presion_flujo",
+    "q11_dificultad_financiera",
+    "q26_urgencia_rent"
+  ],
+
+  "Logística y servicio": [
+    "q19_frec_entregas",
+    "q18_tiempo_pedidos"
+  ],
+
+  "Digital": [
+    "q27_plataforma_digital",
+    "q28_interes_digital",
+    "q29_grupos_wp"
+  ],
+
+  "Decisión y relación": [
+    "q16_quien_decide",
+    "q17_quien_pide",
+    "q21_satisfaccion"
+  ],
+
+  "Cambio de proveedor": [
+    "q13_cambio_por_desc",
+    "q22_nivel_cambio"
+  ]
+};
 
 function renderQuestions(map) {
   const container = document.getElementById("questionsContainer");
   if (!container) return;
 
-  const blacklist = ["ranking"];
+  let html = "";
 
-  container.innerHTML = Object.entries(map)
-    .filter(([key]) => !blacklist.some(b => key.includes(b)))
-    .map(([key, answers]) => `
-      <div class="question-block">
-<h4>${formatQuestionLabel(key)}</h4>
-        ${answers.map(a => `
-          <div class="bar-row">
-            <span class="label">${a.answer}</span>
-            <div class="bar-track">
-              <div class="bar-fill" style="width:${a.percentage}%"></div>
+  Object.entries(QUESTION_GROUPS).forEach(([groupName, keys]) => {
+    const groupQuestions = keys.filter(k => map[k]);
+
+    if (!groupQuestions.length) return;
+
+    html += `
+      <div class="group-block">
+        <h3 class="group-title">${groupName}</h3>
+    `;
+
+    groupQuestions.forEach(key => {
+      const answers = map[key];
+
+      html += `
+        <div class="question-block">
+          <h4>${formatQuestionLabel(key)}</h4>
+
+          ${answers.map(a => `
+            <div class="bar-row">
+              <span class="label">${a.answer}</span>
+              <div class="bar-track">
+                <div class="bar-fill" style="width:${a.percentage}%"></div>
+              </div>
+              <span class="value">${a.percentage}%</span>
             </div>
-            <span class="value">${a.percentage}%</span>
-          </div>
-        `).join("")}
-      </div>
-    `)
-    .join("");
-}
-async function init() {
-  const rows = await loadKPIs();
-  renderTablaFarmacias(rows);
+          `).join("")}
+        </div>
+      `;
+    });
 
-  const percentages = await loadPercentages();
-renderQuestions(percentages);
+    html += `</div>`;
+  });
 
-  const criterios = await loadRanking("criterios");
-  const motivos = await loadRanking("motivos_cambio");
-  const barreras = await loadRanking("barreras");
-
-  renderBarChart("chartCriterios", criterios);
-  renderBarChart("chartMotivos", motivos);
-  renderBarChart("chartBarreras", barreras);
-  renderInsight(rows);
+  container.innerHTML = html;
 }
 
 init();

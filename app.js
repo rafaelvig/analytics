@@ -169,6 +169,42 @@ function renderTablaFarmacias(rows) {
     `)
     .join("");
 }
+const QUESTION_LABELS = {
+  q1_tipo_farmacia: "Tipo de farmacia",
+  q2_provincia: "Provincia",
+  q2_ciudad: "Ciudad",
+  q3_empleados: "Cantidad de empleados",
+  q4_facturacion: "Nivel de facturación",
+  q5_evaluaria: "Evaluaría nuevo proveedor",
+  q6_principal_60: "Proveedor principal actual",
+  q7_pct_compras: "Concentración de compras",
+  q8_pct_pami: "Participación PAMI",
+  q9_plazo_cobro: "Plazo promedio de cobro",
+  q10_presion_flujo: "Presión sobre flujo de fondos",
+  q11_dificultad_financiera: "Dificultad financiera",
+  q13_cambio_por_desc: "Apertura al cambio por descuento",
+  q14_frec_comp_precios: "Frecuencia de comparación de precios",
+  q15_dispuesto_mejora: "Disposición a trabajar con nuevo proveedor",
+  q16_quien_decide: "Quién decide la compra",
+  q17_quien_pide: "Quién realiza los pedidos",
+  q18_tiempo_pedidos: "Tiempo dedicado a pedidos",
+  q19_frec_entregas: "Frecuencia de entregas requerida",
+  q20_antiguedad: "Antigüedad de la farmacia",
+  q21_satisfaccion: "Satisfacción actual",
+  q22_nivel_cambio: "Nivel de apertura al cambio",
+  q23_motivos_cambio: "Motivos de cambio",
+  q24_ranking_barreras: "Barreras al cambio",
+  q25_nivel_cambio: "Probabilidad de cambio",
+  q26_urgencia_rent: "Urgencia por mejorar rentabilidad",
+  q27_plataforma_digital: "Uso de plataforma digital",
+  q28_interes_digital: "Interés en herramientas digitales",
+  q29_grupos_wp: "Participación en grupos de WhatsApp"
+};
+
+function formatQuestionLabel(key) {
+  return QUESTION_LABELS[key] || key.replaceAll("_", " ");
+}
+
 function renderQuestions(map) {
   const container = document.getElementById("questionsContainer");
   if (!container) return;
@@ -179,8 +215,7 @@ function renderQuestions(map) {
     .filter(([key]) => !blacklist.some(b => key.includes(b)))
     .map(([key, answers]) => `
       <div class="question-block">
-        <h4>${formatLabel(key)}</h4>
-
+<h4>${formatQuestionLabel(key)}</h4>
         ${answers.map(a => `
           <div class="bar-row">
             <span class="label">${a.answer}</span>

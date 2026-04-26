@@ -346,4 +346,28 @@ tbody td {
   .bar-row .value {
     text-align: left;
   }
+  .dashboard-layout {
+  display: grid;
+  grid-template-columns: minmax(620px, 1.3fr) minmax(360px, 0.7fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.questions-panel {
+  min-height: 780px;
+}
+
+.side-charts {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.chart-compact {
+  padding: 16px;
+}
+
+.chart-compact .panel-head h3 {
+  font-size: 16px;
+}
 }

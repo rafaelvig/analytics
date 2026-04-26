@@ -62,73 +62,64 @@
         <div id="insightText"></div>
       </section>
 
-      <section class="grid">
-        <div class="card panel" data-tooltip="Ranking agregado ponderado. Se asigna mayor peso a las posiciones más altas (1° = mayor valor). Refleja qué factores pesan más en la decisión de compra.">
-          <div class="panel-head">
-            <h3>Criterios de elección</h3>
-          </div>
-          <div id="chartCriterios"></div>
-        </div>
-        <div class="card panel">
-  <div class="panel-head">
-    <h3>Respuestas por pregunta (%)</h3>
-  </div>
-  <div id="questionsContainer"></div>
-</div>
+     <section class="dashboard-layout">
 
-       <div class="card panel" data-tooltip="Identifica qué factores impulsan el cambio de proveedor. Se pondera la posición en el ranking para reflejar la intensidad del motivo.">
-  <div class="panel-head">
-    <h3>Motivos de cambio</h3>
+  <div class="card panel questions-panel">
+    <div class="panel-head">
+      <h3>Respuestas por pregunta (%)</h3>
+    </div>
+    <div id="questionsContainer"></div>
   </div>
-  <div id="chartMotivos"></div>
-</div>
 
-      <div class="card panel" data-tooltip="Muestra los principales frenos al cambio. Las primeras posiciones indican mayor resistencia percibida.">
-  <div class="panel-head">
-    <h3>Barreras al cambio</h3>
-  </div>
-  <div id="chartBarreras"></div>
-</div>
+  <div class="side-charts">
 
-     <div class="card panel" id="cuentas" data-tooltip="Scores construidos a partir de respuestas sobre precio, apertura al cambio, digitalización y presión financiera. La oportunidad es un score ponderado entre esos factores.">
-  <div class="panel-head">
-    <h3>Score comercial por farmacia</h3>
+    <div class="card panel chart-compact" data-tooltip="Ranking agregado ponderado. Se asigna mayor peso a las posiciones más altas (1° = mayor valor). Refleja qué factores pesan más en la decisión de compra.">
+      <div class="panel-head">
+        <h3>Criterios de elección</h3>
+      </div>
+      <div id="chartCriterios"></div>
+    </div>
+
+    <div class="card panel chart-compact" data-tooltip="Identifica qué factores impulsan el cambio de proveedor. Se pondera la posición en el ranking para reflejar la intensidad del motivo.">
+      <div class="panel-head">
+        <h3>Motivos de cambio</h3>
+      </div>
+      <div id="chartMotivos"></div>
+    </div>
+
+    <div class="card panel chart-compact" data-tooltip="Muestra los principales frenos al cambio. Las primeras posiciones indican mayor resistencia percibida.">
+      <div class="panel-head">
+        <h3>Barreras al cambio</h3>
+      </div>
+      <div id="chartBarreras"></div>
+    </div>
+
+    <div class="card panel" id="cuentas" data-tooltip="Scores construidos a partir de respuestas sobre precio, apertura al cambio, digitalización y presión financiera. La oportunidad es un score ponderado entre esos factores.">
+      <div class="panel-head">
+        <h3>Score comercial por farmacia</h3>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Farmacia</th>
+              <th>Resp.</th>
+              <th>Precio</th>
+              <th>Cambio</th>
+              <th>Digital</th>
+              <th>Financiero</th>
+              <th>Oportunidad</th>
+            </tr>
+          </thead>
+          <tbody id="tablaFarmacias"></tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Farmacia</th>
-          <th>Resp.</th>
-          <th>Precio</th>
-          <th>Cambio</th>
-          <th>Digital</th>
-          <th>Financiero</th>
-          <th>Oportunidad</th>
-        </tr>
-      </thead>
-      <tbody id="tablaFarmacias"></tbody>
-    </table>
-  </div>
-</div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Farmacia</th>
-                  <th>Resp.</th>
-                  <th>Precio</th>
-                  <th>Cambio</th>
-                  <th>Digital</th>
-                  <th>Financiero</th>
-                  <th>Oportunidad</th>
-                </tr>
-              </thead>
-              <tbody id="tablaFarmacias"></tbody>
-            </table>
-          </div>
-        </div>
-      </section>
+
+</section>
     </main>
   </div>
 

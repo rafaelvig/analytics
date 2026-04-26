@@ -321,5 +321,24 @@ function renderQuestions(map) {
 
   container.innerHTML = html;
 }
+async function init() {
+  const rows = await loadKPIs();
+  renderTablaFarmacias(rows);
+
+  const percentages = await loadPercentages();
+  renderQuestions(percentages);
+
+  const criterios = await loadRanking("criterios");
+  const motivos = await loadRanking("motivos_cambio");
+  const barreras = await loadRanking("barreras");
+
+  renderBarChart("chartCriterios", criterios);
+  renderBarChart("chartMotivos", motivos);
+  renderBarChart("chartBarreras", barreras);
+
+  renderInsight(rows);
+}
+
+init();
 
 init();

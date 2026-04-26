@@ -88,6 +88,17 @@ async function loadPercentages() {
 
   return map;
 }
+
+function formatLabel(key) {
+  const map = {
+    q1_tipo_farmacia: "Tipo de farmacia",
+    q10_presion_flujo: "Presión financiera",
+    q11_dificultad_financiera: "Dificultad financiera",
+    q21_satisfaccion: "Nivel de satisfacción"
+  };
+
+  return map[key] || key.replaceAll("_", " ");
+}
 function renderBarChart(elId, rows) {
   const el = document.getElementById(elId);
   if (!el) return;

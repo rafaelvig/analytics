@@ -370,4 +370,15 @@ tbody td {
 .chart-compact .panel-head h3 {
   font-size: 16px;
 }
+  .group-block {
+  margin-bottom: 24px;
+}
+
+.group-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--brand-soft);
+}
 }

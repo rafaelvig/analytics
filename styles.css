@@ -230,4 +230,34 @@ tbody td {
   opacity: 1;
   transform: translateY(0);
 }
+
+  .question-block {
+  margin-bottom: 18px;
+}
+
+.question-block h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 50px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.bar-track {
+  background: #eef2f3;
+  border-radius: 6px;
+  overflow: hidden;
+  height: 8px;
+}
+
+.bar-fill {
+  height: 100%;
+  background: #31999e;
+}
 }

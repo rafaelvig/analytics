@@ -68,6 +68,26 @@ async function loadRanking(tipo) {
     .sort((a, b) => b.value - a.value);
 }
 
+
+async function loadPercentages() {
+  const { data, error } = await sb
+    .from("vw_encuesta_porcentajes")
+    .select("*");
+
+  if (error) {
+    console.error("loadPercentages error:", error);
+    return {};
+  }
+
+  const map = {};
+
+  (data || []).forEach(row => {
+    if (!map[row.question_key]) map[row.question_key] = [];
+    map[row.question_key].push(row);
+  });
+
+  return map;
+}
 function renderBarChart(elId, rows) {
   const el = document.getElementById(elId);
   if (!el) return;
@@ -138,10 +158,37 @@ function renderTablaFarmacias(rows) {
     `)
     .join("");
 }
+function renderQuestions(map) {
+  const container = document.getElementById("questionsContainer");
+  if (!container) return;
 
+  const blacklist = ["ranking"]; // excluir rankings
+
+  container.innerHTML = Object.entries(map)
+    .filter(([key]) => !blacklist.some(b => key.includes(b)))
+    .map(([key, answers]) => `
+      <div class="question-block">
+        <h4>${key}</h4>
+
+        ${answers.map(a => `
+          <div class="bar-row">
+            <span>${a.answer}</span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:${a.percentage}%"></div>
+            </div>
+            <span>${a.percentage}%</span>
+          </div>
+        `).join("")}
+      </div>
+    `)
+    .join("");
+}
 async function init() {
   const rows = await loadKPIs();
   renderTablaFarmacias(rows);
+
+  const percentages = await loadPercentages();
+renderQuestions(percentages);
 
   const criterios = await loadRanking("criterios");
   const motivos = await loadRanking("motivos_cambio");

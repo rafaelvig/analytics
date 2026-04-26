@@ -200,9 +200,39 @@ const QUESTION_LABELS = {
   q28_interes_digital: "Interés en herramientas digitales",
   q29_grupos_wp: "Participación en grupos de WhatsApp"
 };
-
 function formatQuestionLabel(key) {
-  return QUESTION_LABELS[key] || key.replaceAll("_", " ");
+  const map = {
+    q1_tipo_farmacia: "Tipo de farmacia",
+    q2_provincia: "Provincia",
+    q2_ciudad: "Ciudad",
+    q3_empleados: "Cantidad de empleados",
+    q4_facturacion: "Nivel de facturación",
+    q7_pct_obras: "Participación obras sociales",
+    q8_pct_pami: "Participación PAMI",
+    q9_plazo_cobro: "Plazo promedio de cobro",
+    q10_presion_flujo: "Presión financiera",
+    q11_dificultad_financiera: "Dificultad financiera",
+    q13_cambio_por_desc: "Apertura al cambio",
+    q14_frec_comp_precios: "Frecuencia comparación de precios",
+    q16_quien_decide: "Quién decide la compra",
+    q17_quien_pide: "Quién realiza pedidos",
+    q18_tiempo_pedidos: "Tiempo dedicado a pedidos",
+    q19_frec_entregas: "Frecuencia de entregas",
+    q20_antiguedad: "Antigüedad",
+    q21_satisfaccion: "Nivel de satisfacción",
+    q22_nivel_cambio: "Nivel de apertura al cambio",
+    q26_urgencia_rent: "Urgencia por rentabilidad",
+    q27_plataforma_digital: "Uso de plataforma digital",
+    q29_grupos_wp: "Uso de grupos de WhatsApp"
+  };
+
+  if (map[key]) return map[key];
+
+  // 🔥 LIMPIEZA AUTOMÁTICA
+  return key
+    .replace(/^q\d+_/, "") // elimina q1_, q2_, etc
+    .replaceAll("_", " ")
+    .replace(/\b\w/g, l => l.toUpperCase());
 }
 
 function renderQuestions(map) {

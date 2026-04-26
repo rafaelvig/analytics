@@ -58,7 +58,7 @@ body {
 }
 
 .brand p {
-  color: rgba(255,255,255,0.7);
+  color: rgba(255, 255, 255, 0.7);
   margin-top: 2px;
 }
 
@@ -69,7 +69,7 @@ body {
 }
 
 .menu a {
-  color: rgba(255,255,255,0.75);
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
   padding: 12px 14px;
   border-radius: 12px;
@@ -77,12 +77,13 @@ body {
 
 .menu a.active,
 .menu a:hover {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   color: white;
 }
 
 .main {
   padding: 28px;
+  overflow-x: hidden;
 }
 
 .topbar {
@@ -92,6 +93,10 @@ body {
 .topbar h2,
 .topbar p {
   margin: 0;
+}
+
+.topbar h2 {
+  font-size: 28px;
 }
 
 .topbar p {
@@ -133,6 +138,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 18px;
+  align-items: start;
 }
 
 .panel {
@@ -146,6 +152,11 @@ body {
 .panel-head h3 {
   margin: 0;
   font-size: 18px;
+}
+
+#insightText p {
+  margin: 10px 0;
+  line-height: 1.45;
 }
 
 .table-wrap {
@@ -183,6 +194,100 @@ tbody td {
   font-weight: 700;
 }
 
+/* Tooltips */
+
+.card[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+
+.card[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 18px;
+  width: 280px;
+  background: #0f1b1e;
+  color: #fff;
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.4;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: all 0.2s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.card[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respuestas por pregunta */
+
+#questionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.question-block {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.question-block:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.question-block h4 {
+  margin: 0 0 12px 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 170px minmax(120px, 1fr) 48px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.bar-row .label {
+  color: var(--text);
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+.bar-track {
+  height: 9px;
+  border-radius: 999px;
+  background: #e8eef0;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--brand);
+  transition: width 0.4s ease;
+}
+
+.bar-row .value {
+  text-align: right;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* Responsive */
+
 @media (max-width: 1100px) {
   .cards,
   .grid {
@@ -196,99 +301,23 @@ tbody td {
   .sidebar {
     display: none;
   }
-  .card[data-tooltip] {
-  position: relative;
-  cursor: help;
 }
 
-..card[data-tooltip] {
-  position: relative;
-  cursor: help;
-}
+@media (max-width: 700px) {
+  .main {
+    padding: 18px;
+  }
 
-.card[data-tooltip]::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 110%;
-  left: 0;
-  width: 260px;
-  background: #0f1b1e;
-  color: #fff;
-  padding: 10px 12px;
-  font-size: 12px;
-  line-height: 1.4;
-  border-radius: 8px;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(6px);
-  transition: all 0.2s ease;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  z-index: 10;
-}
-
-.card[data-tooltip]:hover::after {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-  .question-block {
-  margin-bottom: 18px;
-}
-
-.question-block h4 {
-  margin: 0 0 8px 0;
-  font-size: 14px;
-}
-
-.bar-row {
-  display: grid;
-  grid-template-columns: 120px 1fr 50px;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 6px;
-  font-size: 12px;
-}
-
-.bar-track {
-  background: #eef2f3;
-  border-radius: 6px;
-  overflow: hidden;
-  height: 8px;
-}
-
-.bar-fill {
-  height: 100%;
-  background: #31999e;
-}
+  .cards {
+    grid-template-columns: 1fr;
+  }
 
   .bar-row {
-  display: grid;
-  grid-template-columns: 160px 1fr 50px;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 6px;
-  font-size: 12px;
-}
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
 
-.bar-track {
-  background: #eef2f3;
-  border-radius: 6px;
-  overflow: hidden;
-  height: 8px;
-}
-
-.bar-fill {
-  height: 100%;
-  background: #31999e;
-  transition: width 0.4s ease;
-}
-
-.label {
-  color: #1d2b2f;
-}
-
-.value {
-  text-align: right;
-  font-weight: 600;
-}
+  .bar-row .value {
+    text-align: left;
+  }
 }

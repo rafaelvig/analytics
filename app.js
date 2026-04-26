@@ -162,21 +162,21 @@ function renderQuestions(map) {
   const container = document.getElementById("questionsContainer");
   if (!container) return;
 
-  const blacklist = ["ranking"]; // excluir rankings
+  const blacklist = ["ranking"];
 
   container.innerHTML = Object.entries(map)
     .filter(([key]) => !blacklist.some(b => key.includes(b)))
     .map(([key, answers]) => `
       <div class="question-block">
-        <h4>${key}</h4>
+        <h4>${formatLabel(key)}</h4>
 
         ${answers.map(a => `
           <div class="bar-row">
-            <span>${a.answer}</span>
+            <span class="label">${a.answer}</span>
             <div class="bar-track">
               <div class="bar-fill" style="width:${a.percentage}%"></div>
             </div>
-            <span>${a.percentage}%</span>
+            <span class="value">${a.percentage}%</span>
           </div>
         `).join("")}
       </div>

@@ -339,6 +339,6 @@ async function init() {
   renderInsight(rows);
 }
 
-init();
+
 
 init();

@@ -44,7 +44,14 @@ async function loadKPIs() {
 
   return rows;
 }
+function classifyFarmacia(f) {
+  if (f.score_oportunidad >= 80) return "🔥 Oportunidad inmediata";
+  if (f.score_precio >= 70) return "💰 Sensible a precio";
+  if (f.score_digital >= 70) return "💻 Digitalizable";
+  if (f.score_cambio < 50) return "🧊 Baja apertura";
 
+  return "⚖️ Intermedia";
+}
 async function loadRanking(tipo) {
   const { data, error } = await sb
     .from("vw_farmacias_rankings")

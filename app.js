@@ -167,12 +167,39 @@ function renderTopOportunidades(rows) {
     .sort((a, b) => (b.score_oportunidad || 0) - (a.score_oportunidad || 0))
     .slice(0, 3);
 
-  el.innerHTML = top.map((r, i) => `
-    <div class="top-item">
-      <strong>${i + 1}. ${r.farmacia}</strong><br>
-      <span>${classifyFarmacia(r)}</span>
-    </div>
-  `).join("");
+el.innerHTML = top.map((r, i) => `
+  <div class="top-item" data-tooltip="${explainFarmacia(r)}">
+    <strong>${i + 1}. ${r.farmacia}</strong><br>
+    <span>${classifyFarmacia(r)}</span>
+  </div>
+`).join("");
+}
+function explainFarmacia(f) {
+  const razones = [];
+
+  if (f.score_oportunidad >= 80) {
+    razones.push("Alta oportunidad comercial");
+  }
+
+  if (f.score_cambio >= 70) {
+    razones.push("Alta apertura al cambio");
+  } else if (f.score_cambio < 50) {
+    razones.push("Baja apertura al cambio");
+  }
+
+  if (f.score_financiero >= 70) {
+    razones.push("Presión financiera elevada");
+  }
+
+  if (f.score_precio >= 70) {
+    razones.push("Alta sensibilidad a precio");
+  }
+
+  if (f.score_digital >= 70) {
+    razones.push("Buen nivel digital");
+  }
+
+  return razones.join(" • ");
 }
 function renderTablaFarmacias(rows) {
   const tbody = document.getElementById("tablaFarmacias");

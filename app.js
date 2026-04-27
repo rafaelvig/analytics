@@ -103,6 +103,8 @@ function renderBarChart(elId, rows) {
   const el = document.getElementById(elId);
   if (!el) return;
 
+  el.innerHTML = "";
+
   const options = {
     chart: {
       type: "bar",

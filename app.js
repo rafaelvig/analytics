@@ -159,6 +159,21 @@ function renderInsight(rows) {
     <p>Recomendación: ingreso mediante prueba controlada con foco en mejora de margen.</p>
   `;
 }
+function renderTopOportunidades(rows) {
+  const el = document.getElementById("topList");
+  if (!el) return;
+
+  const top = [...rows]
+    .sort((a, b) => (b.score_oportunidad || 0) - (a.score_oportunidad || 0))
+    .slice(0, 3);
+
+  el.innerHTML = top.map((r, i) => `
+    <div class="top-item">
+      <strong>${i + 1}. ${r.farmacia}</strong><br>
+      <span>${classifyFarmacia(r)}</span>
+    </div>
+  `).join("");
+}
 function renderTablaFarmacias(rows) {
   const tbody = document.getElementById("tablaFarmacias");
   if (!tbody) return;
@@ -335,6 +350,9 @@ function renderQuestions(map) {
 }
 async function init() {
   const rows = await loadKPIs();
+
+  renderTopOportunidades(rows); // ← ACA
+
   renderTablaFarmacias(rows);
 
   const percentages = await loadPercentages();

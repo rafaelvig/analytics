@@ -350,6 +350,14 @@ tbody td {
 .question-block {
   min-height: 120px;
 }
+
+td small {
+  display: inline-block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
 /* Responsive */
 
 @media (max-width: 1200px) {

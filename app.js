@@ -167,8 +167,11 @@ function renderTablaFarmacias(rows) {
     .sort((a, b) => Number(b.score_oportunidad || 0) - Number(a.score_oportunidad || 0))
     .map(row => `
       <tr>
-        <td>${row.farmacia}</td>
-        <td>${row.respuestas}</td>
+        <td>
+  <strong>${row.farmacia}</strong><br>
+  <small>${classifyFarmacia(row)}</small>
+</td>
+<td>${row.respuestas}</td>
         <td>${badge(row.score_precio)}</td>
         <td>${badge(row.score_cambio)}</td>
         <td>${badge(row.score_digital)}</td>

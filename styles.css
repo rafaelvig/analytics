@@ -366,6 +366,34 @@ td small {
   font-size: 12px;
   color: var(--muted);
 }
+.top-item {
+  position: relative;
+  cursor: help;
+}
+
+.top-item::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  width: 260px;
+  background: #0f1b1e;
+  color: #fff;
+  padding: 8px 10px;
+  font-size: 12px;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: 0.2s;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.top-item:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Responsive */
 
 @media (max-width: 1200px) {
